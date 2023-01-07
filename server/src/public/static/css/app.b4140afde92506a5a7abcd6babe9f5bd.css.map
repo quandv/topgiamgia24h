@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.b4140afde92506a5a7abcd6babe9f5bd.css"],"names":[],"mappings":"AACA,MACE,YAAc,CACf,AACD,cACE,eAAgB,AAChB,YAAc,CACf","file":"app.b4140afde92506a5a7abcd6babe9f5bd.css","sourcesContent":["\n.shop {\n  height: 180px;\n}\n.shop-img img {\n  max-width: 100%;\n  height: 100px;\n}\n"]}

@@ -1,0 +1,128 @@
+<%- include('../include/header-top') %>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="/bower_components/AdminLTE/dist/css/skins/_all-skins.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/iCheck/flat/blue.css">
+<!-- Morris chart -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/morris/morris.css">
+<!-- jvectormap -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+<!-- Date Picker -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/datepicker/datepicker3.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/daterangepicker/daterangepicker.css">
+<!-- bootstrap wysihtml5 - text editor -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<style>
+    .label-status {
+        cursor: pointer;
+    }
+</style>
+<%- include('../include/header') %>
+<%- include('../include/sidebar') %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Shop
+            <small>Control panel</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Shop</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">List shops</h3>
+            
+                        <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove">
+                            <i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100px">Logo</th>
+                                        <th width="200px">Name</th>
+                                        <th width="100px">Status</th>
+                                        <th >Description</th>
+                                        <th width="200px">Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(data && data.length){ var dataLength = data.length;
+                                        for(var i = 0; i < dataLength; i++) {
+                                    %>
+                                    <tr>
+                                        <td><img src="<%= data[i].avatar %>" width="80px"></td>
+                                        <td><%= data[i].name %></td>
+                                        <td>
+                                            <% if(data[i].status == 1){ %>
+                                                <span class="label label-success label-status" onclick="changeStatus('<%= data[i]._id %>', 2)">Open</span>
+                                            <%}else{%>
+                                                <span class="label label-default label-status" onclick="changeStatus('<%= data[i]._id %>', 1)">Close</span>
+                                            <%}%>
+                                        </td>
+                                        <td><%- data[i].about %></td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs" href="<%= data[i].domain %>" target="_blank" >Link to shop</a>
+                                            <button class="btn btn-warning btn-xs">Edit</button>
+                                        </td>
+                                    </tr>
+                                    <% } } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer"></div>
+                    <!-- /.box-footer-->
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<%- include('../include/footer-js') %>
+<script>
+    $(document).ready(function(){
+
+    })
+
+    function changeStatus(id, status){
+        $.ajax({
+            url: '/admin-topgiamgia24h/shop/status',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: id,
+                status: status
+            }
+        }).done(function(results){
+            alert(results.msg);
+            location.reload();
+        })
+    }
+</script>
+<%- include('../include/footer') %>

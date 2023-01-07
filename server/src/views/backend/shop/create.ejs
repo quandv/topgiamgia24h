@@ -1,0 +1,124 @@
+<%- include('../include/header-top') %>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="/bower_components/AdminLTE/dist/css/skins/_all-skins.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/iCheck/flat/blue.css">
+<!-- Morris chart -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/morris/morris.css">
+<!-- jvectormap -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+<!-- Date Picker -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/datepicker/datepicker3.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/daterangepicker/daterangepicker.css">
+<!-- bootstrap wysihtml5 - text editor -->
+<link rel="stylesheet" href="/bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+<%- include('../include/header') %>
+<%- include('../include/sidebar') %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Shop
+            <small>Add new post</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Add new shop</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add new shop</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" id="add-new-post">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="offer_id">offer_id</label>
+                                <input type="email" class="form-control" id="offer_id" name="offer_id">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">name</label>
+                                <input type="email" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="domain">domain</label>
+                                <input type="email" class="form-control" id="domain" name="domain">
+                            </div>
+                            <div class="form-group">
+                                <label for="aff_url">aff_url</label>
+                                <input type="email" class="form-control" id="aff_url" name="aff_url">
+                            </div>
+                            <div class="form-group">
+                                <label for="aff_url_short">aff_url_short</label>
+                                <input type="email" class="form-control" id="aff_url_short" name="aff_url_short">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="about">about</label>
+                                <textarea name="about" id="about" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>avatar</label>
+                                <input type="file" name="file">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="status" value="1" checked> Enable
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+            
+                        <div class="box-footer text-right">
+                            <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+            
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<%- include('../include/footer-js') %>
+<script>
+    // Functions
+    function save(){
+        var form = $('#add-new-post');
+        var formData = new FormData(form[0]);
+
+        $.ajax({
+            url: '/admin-topgiamgia24h/shop/create',
+            type: 'POST',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            data: formData
+        }).done(function(results){
+            alert(results.msg);
+        })
+    }
+</script>
+<%- include('../include/footer') %>
